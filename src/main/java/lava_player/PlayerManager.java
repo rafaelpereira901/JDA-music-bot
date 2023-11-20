@@ -13,7 +13,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 
 public class PlayerManager {
 
@@ -40,52 +39,52 @@ public class PlayerManager {
 		});
 	}
 	
-	public void loadAndPlay(TextChannel channel, String trackUrl) {
-		final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
-		
-		this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
-			
-			@Override
-			public void trackLoaded(AudioTrack track) {
-				musicManager.scheduler.queue(track);
-				
-				channel.sendMessage("Adicionando à fila: `")
-				.append(track.getInfo().title)
-				.append("` por `")
-				.append(track.getInfo().author)
-				.append("`")
-				.queue();
-			}
-			
-			@Override
-			public void playlistLoaded(AudioPlaylist playlist) {
-				final List<AudioTrack> tracks = playlist.getTracks();
-				
-				channel.sendMessage("Acionando à fila: `")
-				.append(String.valueOf(tracks.size()))
-				.append("` tracks da playlist `")
-				.append(playlist.getName())
-				.append("`")
-				.queue();
-				
-				for(final AudioTrack track : tracks) {
-					musicManager.scheduler.queue(track);					
-				}
-			}
-			
-			@Override
-			public void noMatches() {
-				
-				
-			}
-			
-			@Override
-			public void loadFailed(FriendlyException exception) {
-			
-				
-			}
-		});
-	}
+//	public void loadAndPlay(TextChannel channel, String trackUrl) {
+//		final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
+//		
+//		this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
+//			
+//			@Override
+//			public void trackLoaded(AudioTrack track) {
+//				musicManager.scheduler.queue(track);
+//				
+//				channel.sendMessage("Adicionando à fila: `")
+//				.append(track.getInfo().title)
+//				.append("` por `")
+//				.append(track.getInfo().author)
+//				.append("`")
+//				.queue();
+//			}
+//			
+//			@Override
+//			public void playlistLoaded(AudioPlaylist playlist) {
+//				final List<AudioTrack> tracks = playlist.getTracks();
+//				
+//				channel.sendMessage("Acionando à fila: `")
+//				.append(String.valueOf(tracks.size()))
+//				.append("` tracks da playlist `")
+//				.append(playlist.getName())
+//				.append("`")
+//				.queue();
+//				
+//				for(final AudioTrack track : tracks) {
+//					musicManager.scheduler.queue(track);					
+//				}
+//			}
+//			
+//			@Override
+//			public void noMatches() {
+//				
+//				
+//			}
+//			
+//			@Override
+//			public void loadFailed(FriendlyException exception) {
+//			
+//				
+//			}
+//		});
+//	}
 	
 	public static PlayerManager getInstance(){
 		if (INSTANCE == null) {
